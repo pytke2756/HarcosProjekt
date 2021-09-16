@@ -82,7 +82,26 @@ public class Harcos {
     }
 
     public void megkuzd(Harcos masikHarcos){
-
+        if (masikHarcos.getNev().equals(this.nev)){
+            System.out.println("Hibás ejárás, nem küzdhetsz meg magaddal!");
+        }
+        else if (masikHarcos.getEletero() == 0 || this.getEletero() == 0){
+            System.out.println("Valakinek 0 az életereje így nem lehet megküzdeni!");
+        }
+        else{
+            masikHarcos.setEletero(masikHarcos.getEletero() - this.getSebzes());
+            this.setEletero(this.getEletero() - masikHarcos.getSebzes());
+            if (masikHarcos.getEletero() > 0 && this.getEletero() > 0){
+                masikHarcos.setTapasztalat(masikHarcos.getTapasztalat() + 5);
+                this.setTapasztalat(this.getTapasztalat() + 5);
+            }
+            else if (masikHarcos.getEletero() < 1){
+                this.setTapasztalat(this.getTapasztalat() + 10);
+            }
+            else if (this.getEletero() < 1){
+                masikHarcos.setTapasztalat(masikHarcos.getTapasztalat() + 10);
+            }
+        }
     }
 
     public void gyogyul(){
