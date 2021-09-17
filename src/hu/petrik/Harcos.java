@@ -42,7 +42,11 @@ public class Harcos {
     }
 
     public void setSzint(int szint) {
-        this.szint = szint;
+        if (szint - this.getSzint() == 1 && this.getSzintLepeshez() < 1){
+            this.szint = szint;
+            this.setTapasztalat(0);
+            this.setEletero(this.getMaxEletero());
+        }
     }
 
     public int getTapasztalat() {
@@ -50,7 +54,13 @@ public class Harcos {
     }
 
     public void setTapasztalat(int tapasztalat) {
-        this.tapasztalat = tapasztalat;
+        if (tapasztalat >= this.getSzintLepeshez()){
+            this.setSzint(this.getSzint() + 1);
+        }
+        else{
+            this.tapasztalat = tapasztalat;
+        }
+
     }
 
     public int getAlapEletero() {
@@ -66,19 +76,25 @@ public class Harcos {
     }
 
     public void setEletero(int eletero) {
-        this.eletero = eletero;
+        if (eletero <= 0){
+            this.setTapasztalat(0);
+            this.eletero = eletero;
+        }
+        else if (eletero > this.getMaxEletero()){
+            this.setEletero(this.getMaxEletero());
+        }
     }
 
     public int getSebzes(){
-        return this.alapSebzes + this.szint;
+        return this.getAlapSebzes() + this.getSzint();
     }
 
     public int getSzintLepeshez(){
-        return 10 + (this.szint * 5);
+        return 10 + (this.getSzint() * 5);
     }
 
     public int getMaxEletero(){
-        return this.alapEletero + (this.szint * 3);
+        return this.getAlapEletero() + (this.szint * 3);
     }
 
     public void megkuzd(Harcos masikHarcos){
