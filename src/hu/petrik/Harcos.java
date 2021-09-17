@@ -105,7 +105,12 @@ public class Harcos {
     }
 
     public void gyogyul(){
-
+        if (this.getEletero() == 0){
+            this.setEletero(this.getMaxEletero());
+        }
+        else{
+            this.setEletero(3 + this.getSzint());
+        }
     }
 
     @Override
