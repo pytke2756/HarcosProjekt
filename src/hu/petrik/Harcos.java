@@ -81,7 +81,7 @@ public class Harcos {
             this.eletero = eletero;
         }
         else if (eletero > this.getMaxEletero()){
-            this.setEletero(this.getMaxEletero());
+            this.eletero = this.getMaxEletero();
         }
     }
 
@@ -133,8 +133,8 @@ public class Harcos {
     public String toString() {
         return this.nev +
                 " - LVL: " + this.szint +
-                " - EXP: " + this.tapasztalat + " / " + this.getSzintLepeshez() +
-                " - HP: " + this.eletero + " / " + this.getMaxEletero() +
+                " - EXP: " + this.tapasztalat + "/" + this.getSzintLepeshez() +
+                " - HP: " + this.eletero + "/" + this.getMaxEletero() +
                 " - DMG: " + this.getSebzes();
     }
 }
