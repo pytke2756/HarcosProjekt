@@ -38,11 +38,11 @@ public class Harcos {
     }
 
     public int getSzint() {
-        return szint;
+        return this.szint;
     }
 
     public void setSzint(int szint) {
-        if (szint - this.getSzint() == 1 && this.getSzintLepeshez() < 1){
+        if (szint - this.getSzint() == 1){
             this.szint = szint;
             this.setTapasztalat(0);
             this.setEletero(this.getMaxEletero());
@@ -50,12 +50,13 @@ public class Harcos {
     }
 
     public int getTapasztalat() {
-        return tapasztalat;
+        return this.tapasztalat;
     }
 
     public void setTapasztalat(int tapasztalat) {
         if (tapasztalat >= this.getSzintLepeshez()){
             this.setSzint(this.getSzint() + 1);
+            this.tapasztalat = Math.abs(tapasztalat - this.getSzintLepeshez());
         }
         else{
             this.tapasztalat = tapasztalat;
@@ -64,24 +65,27 @@ public class Harcos {
     }
 
     public int getAlapEletero() {
-        return alapEletero;
+        return this.alapEletero;
     }
 
     public int getAlapSebzes() {
-        return alapSebzes;
+        return this.alapSebzes;
     }
 
     public int getEletero() {
-        return eletero;
+        return this.eletero;
     }
 
     public void setEletero(int eletero) {
         if (eletero <= 0){
             this.setTapasztalat(0);
-            this.eletero = eletero;
+            this.eletero = 0;
         }
         else if (eletero > this.getMaxEletero()){
             this.eletero = this.getMaxEletero();
+        }
+        else{
+            this.eletero = eletero;
         }
     }
 
@@ -124,17 +128,17 @@ public class Harcos {
         if (this.getEletero() == 0){
             this.setEletero(this.getMaxEletero());
         }
-        else{
-            this.setEletero(3 + this.getSzint());
+        else if (this.getEletero() < this.getMaxEletero() && this.getMaxEletero() > 0){
+            this.setEletero(this.getEletero() + 3 + this.getSzint());
         }
     }
 
     @Override
     public String toString() {
         return this.nev +
-                " - LVL: " + this.szint +
-                " - EXP: " + this.tapasztalat + "/" + this.getSzintLepeshez() +
-                " - HP: " + this.eletero + "/" + this.getMaxEletero() +
+                " - LVL: " + this.getSzint() +
+                " - EXP: " + this.getTapasztalat() + "/" + this.getSzintLepeshez() +
+                " - HP: " + this.getEletero() + "/" + this.getMaxEletero() +
                 " - DMG: " + this.getSebzes();
     }
 }
